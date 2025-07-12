@@ -14,6 +14,9 @@
 
 # modified from https://www.rocker-project.org/use/singularity/
 
+export TMPDIR="${HOME}/scripps_hpc_rstudio/rstudio-tmp"
+mkdir -p "$TMPDIR"
+
 export PASSWORD=$(openssl rand -base64 15)
 
 # get unused socket per https://unix.stackexchange.com/a/132524
@@ -45,8 +48,6 @@ When done using RStudio Server, terminate the job by:
 
       qdel -x ${PBS_JOBID}
 END
-
-export TMPDIR="${HOME}/scripps_hpc_rstudio/rstudio-tmp"
 
 # make ssh key for passwordless internode ssh
 # if you already have a public key copy it to .ssh/authorized_keys
