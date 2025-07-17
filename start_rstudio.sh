@@ -2,7 +2,7 @@
 #SBATCH --output="r_studio.log"
 #SBATCH --job-name="rstudio_server"
 #SBATCH --time=12:00:00    # walltime
-#SBATCH --cpus-per-task=8  # number of cores
+#SBATCH --cpus-per-task=1  # number of cores
 #SBATCH --mem-per-cpu=8G   # memory per CPU core
 #SBATCH --error="r_studio.err"   # error log
 #SBATCH --partition="highmem"
@@ -88,6 +88,7 @@ singularity exec \
    --bind="$TMPDIR/var/lib:/var/lib/rstudio-server" \
    --bind="$TMPDIR/var/run:/var/run/rstudio-server" \
    --bind="$TMPDIR/tmp:/tmp" \
+   --bind="/mnt/jin:/mnt/jin" \
    --bind="/gpfs/group/jin:/gpfs/group/jin" \
    ${HOME}/scripps_hpc_rstudio/rstudio-hpc-v3.sif bash -c "\
    rserver --www-port ${PORT} --auth-none=0 --auth-pam-helper-path=pam-helper \
